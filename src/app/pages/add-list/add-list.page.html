@@ -1,0 +1,41 @@
+<ion-content>
+  <header class="header">
+    <app-menu></app-menu>
+    <h2>Cadastrar Lista</h2>
+  </header>
+  <section class="content">
+    <h1>Nova Lista</h1>
+    <div>
+      <ion-item>
+        <ion-label position="floating">Titulo</ion-label>
+        <ion-input [(ngModel)]="list.title"></ion-input>
+      </ion-item>
+    </div>
+    <div>
+      <ion-item>
+        <ion-label position="floating">Descrição</ion-label>
+        <ion-input [(ngModel)]="list.description"></ion-input>
+      </ion-item>
+    </div>
+    <div class="content-new-item">
+      <ion-item>
+        <ion-label position="floating">Item</ion-label>
+        <ion-input [(ngModel)]="newValue"></ion-input>
+      </ion-item>
+      <ion-button (click)="addNewItem()" expand="block" class="content-new-item__button">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <ion-list class="content-list">
+      <h3>Lista</h3>
+      <p *ngIf="!list.values.length" class="content-list-text">Lista vazia, por favor adicione um item.</p>
+      <ion-item style="--padding-start: 0;" *ngFor="let value of list.values; let i = index">
+        <ion-label>{{i + 1}} - {{value}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-button (click)="save()" color="primary" expand="block">
+      Cadastrar
+    </ion-button>
+
+  </section>
+</ion-content>

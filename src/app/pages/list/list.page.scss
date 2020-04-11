@@ -1,0 +1,36 @@
+.header {
+    padding: 16px;
+    background-color: var(--ion-color-primary);
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.content {
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.content-titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+    color: var(--ion-color-primary);
+    text-align: center;
+}
+
+.content-titles__title {
+    margin-bottom: 8px;
+}
+
+.content-titles__subtitle {
+    // color: rgba(0, 0, 0, 0.3);
+    opacity: 0.5;
+}
+
+.content-button {
+    bottom: 24px;
+    right: 24px;
+}

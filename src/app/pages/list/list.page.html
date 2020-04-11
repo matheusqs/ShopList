@@ -1,0 +1,32 @@
+<ion-content>
+  <header class="header">
+    <app-menu></app-menu>
+    <h2>Visualizar Lista</h2>
+  </header>
+  <section class="content">
+    <section class="content-titles">
+      <h3 class="content-titles__title">{{list.title}}</h3>
+      <p class="content-titles__subtitle">{{list.description}}</p>
+    </section>
+    <ion-list>
+      <ng-container *ngFor="let item of list.values">
+        <ion-item *ngIf="canShowMarkedItens || !item.isChecked">
+          <ion-label>{{item.value}}</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="item.isChecked"></ion-checkbox>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </section>
+</ion-content>
+<ion-fab (click)="hideMarkedItens()" *ngIf="canShowMarkedItens; else elseHide" class="content-button">
+  <ion-fab-button color="secondary">
+    <ion-icon name="eye-off-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ng-template #elseHide>
+  <ion-fab (click)="showMarkedItens()" class="content-button">
+    <ion-fab-button color="secondary">
+      <ion-icon name="eye-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ng-template>
