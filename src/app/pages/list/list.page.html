@@ -6,7 +6,7 @@
   <section class="content">
     <section class="content-titles">
       <h3 class="content-titles__title">{{list.title}}</h3>
-      <p class="content-titles__subtitle">{{list.description}}</p>
+      <p class="content-titles__subtitle" *ngIf="list.description">{{list.description}}</p>
     </section>
     <ion-list>
       <ng-container *ngFor="let item of list.values">
@@ -16,6 +16,7 @@
         </ion-item>
       </ng-container>
     </ion-list>
+    <ion-button expand="block">Criar lista com itens faltantes</ion-button>
   </section>
 </ion-content>
 <ion-fab (click)="hideMarkedItens()" *ngIf="canShowMarkedItens; else elseHide" class="content-button">

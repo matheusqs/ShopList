@@ -1,34 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ListItens } from 'src/app/core/models/list-itens.model';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.page.html',
   styleUrls: ['./list.page.scss'],
 })
-export class ListPage implements OnInit {
+export class ListPage {
 
   public canShowMarkedItens = false;
-  public list;
+  public list: ListItens;
 
   // tslint:disable-next-line: variable-name
   constructor(private _Activatedroute: ActivatedRoute) {
     this._Activatedroute.params.subscribe(params => {
-      debugger;
       const values = params.values.split(',');
       const test = values.map((value) => ({ value, isChecked: false }));
-      this.list = { values: test, title: params.title, description: params.description, isChecked: false };
+      this.list = { values: test, title: params.title, description: params.description };
     });
   }
 
-  ngOnInit() { }
-
-  showMarkedItens() {
+  public showMarkedItens() {
     this.canShowMarkedItens = true;
   }
 
-  hideMarkedItens() {
+  public hideMarkedItens() {
     this.canShowMarkedItens = false;
+  }
+
+  public createListUnmarkedItens() {
+    const list: ListItens;
+    Object.assign(list, this.list);
+    list.values = this.list.values.map(() => );
   }
 
 }

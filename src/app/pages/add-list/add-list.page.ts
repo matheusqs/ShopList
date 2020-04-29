@@ -11,7 +11,7 @@ import { ListManagementService } from 'src/app/core/services/list-management.ser
 export class AddListPage implements OnInit {
 
   public list: ListItens = new ListItens();
-  public newValue: string;
+  public newValue = { value: '', isChecked: false };
 
   constructor(
     private listManagementService: ListManagementService,
