@@ -24,4 +24,15 @@ export class StorageService {
       return null;
     }
   }
+
+  public async getAllValues() {
+    const values = [];
+    const keys = await this.storage.keys();
+
+    for (const key of keys) {
+      values.push(await this.storage.get(key));
+    }
+    
+    return values;
+  }
 }

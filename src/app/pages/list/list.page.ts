@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ListItens } from 'src/app/core/models/list-itens.model';
+import { ListManagementService } from 'src/app/core/services/list-management.service';
 
 @Component({
   selector: 'app-list',
@@ -10,14 +11,15 @@ import { ListItens } from 'src/app/core/models/list-itens.model';
 export class ListPage {
 
   public canShowMarkedItens = false;
-  public list: ListItens;
+  public list: ListItens = new ListItens();
 
   // tslint:disable-next-line: variable-name
-  constructor(private _Activatedroute: ActivatedRoute) {
-    this._Activatedroute.params.subscribe(params => {
-      const values = params.values.split(',');
-      const test = values.map((value) => ({ value, isChecked: false }));
-      this.list = { values: test, title: params.title, description: params.description };
+  constructor(
+    _Activatedroute: ActivatedRoute,
+    public listManagementService: ListManagementService
+    ) {
+    _Activatedroute.params.subscribe(async params => {
+      this.list = await this.listManagementService.getList(params.id);
     });
   }
 
@@ -30,9 +32,9 @@ export class ListPage {
   }
 
   public createListUnmarkedItens() {
-    const list: ListItens;
-    Object.assign(list, this.list);
-    list.values = this.list.values.map(() => );
+    // const list: ListItens;
+    // Object.assign(list, this.list);
+    // list.values = this.list.values.map(() => );
   }
 
 }

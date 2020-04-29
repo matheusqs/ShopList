@@ -29,8 +29,8 @@
     <ion-list class="content-list">
       <h3>Lista</h3>
       <p *ngIf="!list.values.length" class="content-list-text">Lista vazia, por favor adicione um item.</p>
-      <ion-item style="--padding-start: 0;" *ngFor="let value of list.values; let i = index">
-        <ion-label>{{i + 1}} - {{value}}</ion-label>
+      <ion-item style="--padding-start: 0;" *ngFor="let item of list.values; let i = index">
+        <ion-label>{{item.value}}</ion-label>
       </ion-item>
     </ion-list>
     <ion-button (click)="save()" color="primary" expand="block">

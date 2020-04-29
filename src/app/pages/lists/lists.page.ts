@@ -18,7 +18,7 @@ export class ListsPage implements OnInit, OnDestroy {
   public async ngOnInit() { }
 
   public navigateList(list: ListItens) {
-    this.router.navigate(['/show-list', list]);
+    this.router.navigate(['/show-list', list.uuid]);
   }
 
   public ngOnDestroy() { }

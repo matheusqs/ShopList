@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
 import { ListItens } from '../models/list-itens.model';
-import { StorageKeys } from '../models/storage-keys.enum';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -18,14 +18,20 @@ export class ListManagementService {
   }
 
   public async reloadLists(): Promise<void> {
-    this._lists = ((await this.storageService.getValue(StorageKeys.LISTS)) as ListItens[]) || [];
+    this._lists = ((await this.storageService.getAllValues()) as ListItens[]) || [];
     this.emitLists();
   }
 
   public addList(list: ListItens) {
-    this.storageService.setValue(StorageKeys.LISTS, [...this._lists, list]);
+    const uuid = uuidv4();
+    list.uuid = uuid;
+    this.storageService.setValue(uuid, list);
     this._lists.push(list);
     this.emitLists();
+  }
+
+  public async getList(key: string): Promise<ListItens> {
+    return await this.storageService.getValue(key);
   }
 
   public emitLists(): void {
