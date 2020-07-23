@@ -5,8 +5,11 @@
   </header>
   <section class="content">
     <ion-list>
-      <ion-item *ngFor="let list of listManagementService.lists$ | async" (click)="navigateList(list)">
-        <ion-label>{{list.title}}</ion-label>
+      <ion-item *ngFor="let list of listManagementService.lists$ | async">
+        <ion-label (click)="navList(list)">{{list.title}}</ion-label>
+        <ion-button class="item__button" (click)="navUpdateList(list)">
+          <ion-icon name="pencil-outline"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
   </section>

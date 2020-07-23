@@ -11,31 +11,38 @@
         <ion-input [(ngModel)]="list.title"></ion-input>
       </ion-item>
     </div>
+
     <div>
       <ion-item>
         <ion-label position="floating">Descrição</ion-label>
         <ion-input [(ngModel)]="list.description"></ion-input>
       </ion-item>
     </div>
+
     <div class="content-new-item">
       <ion-item>
         <ion-label position="floating">Item</ion-label>
         <ion-input [(ngModel)]="newValue.value"></ion-input>
       </ion-item>
-      <ion-button (click)="addNewItem()" expand="block" class="content-new-item__button">
+      <ion-button (click)="addItem()" expand="block" class="content-new-item__button">
         <ion-icon name="add-outline"></ion-icon>
       </ion-button>
     </div>
+
     <ion-list class="content-list">
       <h3>Lista</h3>
-      <p *ngIf="!list.values.length" class="content-list-text">Lista vazia, por favor adicione um item.</p>
-      <ion-item style="--padding-start: 0;" *ngFor="let item of list.values; let i = index">
+
+      <ion-item *ngFor="let item of list.values; let i = index">
         <ion-label>{{item.value}}</ion-label>
+        <ion-button (click)="removeItem(i)" expand="block" class="item__button">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
       </ion-item>
+
+      <p *ngIf="!list.values.length" class="content-list-text">Lista vazia, por favor adicione um item.</p>
     </ion-list>
     <ion-button (click)="save()" color="primary" expand="block">
-      Cadastrar
+      Salvar
     </ion-button>
-
   </section>
 </ion-content>

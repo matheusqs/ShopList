@@ -5,10 +5,9 @@ import { ListItens } from '../models/list-itens.model';
 import { StorageService } from './storage.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListManagementService {
-
   // tslint:disable-next-line: variable-name
   private _lists: ListItens[];
   public lists$ = new BehaviorSubject<ListItens[]>([]);
@@ -18,7 +17,8 @@ export class ListManagementService {
   }
 
   public async reloadLists(): Promise<void> {
-    this._lists = ((await this.storageService.getAllValues()) as ListItens[]) || [];
+    this._lists =
+      ((await this.storageService.getAllValues()) as ListItens[]) || [];
     this.emitLists();
   }
 
@@ -27,6 +27,18 @@ export class ListManagementService {
     list.uuid = uuid;
     this.storageService.setValue(uuid, list);
     this._lists.push(list);
+    this.emitLists();
+  }
+
+  public updateList(list: ListItens) {
+    this.storageService.setValue(list.uuid, list);
+
+    const listFound = this._lists.find(
+      (listParam) => listParam.uuid === list.uuid
+    );
+
+    Object.assign(listFound, list);
+
     this.emitLists();
   }
 
