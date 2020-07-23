@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'add-list/:id',
     loadChildren: () => import('./pages/add-list/add-list.module').then(m => m.AddListModule)
+  },
+  {
+    path: 'add-list',
+    loadChildren: () => import('./pages/add-list/add-list.module').then(m => m.AddListModule)
   }
 ];
 @NgModule({

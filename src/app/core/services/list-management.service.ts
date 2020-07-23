@@ -42,6 +42,14 @@ export class ListManagementService {
     this.emitLists();
   }
 
+  public deleteList(uuid: string) {
+    this.storageService.deleteValue(uuid);
+    this._lists.splice(
+      this._lists.indexOf(this._lists.find((list) => list.uuid === uuid)),
+      1
+    );
+  }
+
   public async getList(key: string): Promise<ListItens> {
     return await this.storageService.getValue(key);
   }
